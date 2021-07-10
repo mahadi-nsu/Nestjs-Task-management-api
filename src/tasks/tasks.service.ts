@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 export class TasksService {
   private tasks: Task[] = [];
 
-  getAllTasks() {
+  getAllTasks(): Task[] {
     return this.tasks;
   }
 
@@ -17,9 +17,7 @@ export class TasksService {
       description,
       status: TaskStatus.OPEN,
     };
-
     this.tasks.push(task);
-
     return task;
   }
 }
