@@ -11,7 +11,7 @@ export class TasksController {
   constructor(private tasksService: TasksService) {}
 
   @Get()
-  getAllTasks(@Query() filterDto: GetTaskFilterDto): Task[] {
+  getAllTasks(@Query(ValidationPipe) filterDto: GetTaskFilterDto): Task[] {
     if (Object.keys(filterDto).length) {
       // if we have any query we return
       return this.tasksService.getTaskWithFilters(filterDto);
@@ -37,10 +37,10 @@ export class TasksController {
     return this.tasksService.createTask(createTaskDto);
   }
 
-  @Patch('/:id/status') 
+  @Patch('/:id/status')
   updateTaskStatus(
     @Param('id') id: string,
-    @Body('status' , TaskStatusValidationPipe) status: TaskStatus,
+    @Body('status', TaskStatusValidationPipe) status: TaskStatus,
   ): Task {
     return this.tasksService.updateTask(id, status);
   }
